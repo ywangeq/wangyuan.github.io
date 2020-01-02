@@ -95,9 +95,6 @@ chrome-tab-theme-color: "#000000"
 service-worker: true
 
 
-permalink: /:categories/:title/
-navbar-links:
-categories: "https://ywangeq.github.io/categories/"
 
 
 # Friends
