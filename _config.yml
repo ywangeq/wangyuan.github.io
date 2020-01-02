@@ -97,7 +97,7 @@ service-worker: true
 
 permalink: /:categories/:title/
 navbar-links:
-category: "https://ywangeq.github.io/categories/"
+categories: "https://ywangeq.github.io/categories/"
 
 
 # Friends
