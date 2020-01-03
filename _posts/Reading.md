@@ -12,3 +12,12 @@ tags:
 ---
 
 zongjie*1111111111111*
+iOS手势分为下面这几种：
+
+- UITapGestureRecognizer（点按）
+- UIPanGestureRecognizer（拖动）
+- UIScreenEdgePanGestureRecognizer (边缘拖动)
+- UIPinchGestureRecognizer（捏合）
+- UIRotationGestureRecognizer（旋转）
+- UILongPressGestureRecognizer（长按）
+- ​UISwipeGestureRecognizer（轻扫）
