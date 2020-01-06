@@ -2,6 +2,7 @@
 layout:     post
 title:      Reading
 subtitle:   Decoders Matter for Semantic Segmentation
+date:       2019-12-22
 author:     WY
 header-img: img/post-bg-debug.jpg
 catalog: true
