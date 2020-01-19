@@ -1,0 +1,83 @@
+---
+layout:     post
+title:      Leecode 834
+subtitle:   树中距离之和
+date:       2020-01-14
+author:     WY
+header-img: img/post-bg-ios9-web.jpg
+catalog: true
+tags:
+    - Leecode_hard
+    - 树形dp
+    - dfs
+    - tree
+    - python
+---
+
+给定一个无向、连通的树。树中有 N 个标记为 0...N-1 的节点以及 N-1 条边 。
+
+第 i 条边连接节点 edges[i][0] 和 edges[i][1] 。
+
+返回一个表示节点 i 与其他所有节点距离之和的列表 ans。
+
+输入: N = 6, edges = [[0,1],[0,2],[2,3],[2,4],[2,5]]
+输出: [8,12,6,10,10,10]
+解释: 
+如下为给定的树的示意图：
+  0
+ / \
+1   2
+   /|\
+  3 4 5
+
+我们可以计算出 dist(0,1) + dist(0,2) + dist(0,3) + dist(0,4) + dist(0,5) 
+也就是 1 + 1 + 2 + 2 + 2 = 8。 因此，answer[0] = 8，以此类推。
+
+> 惭愧，这条今天没看懂开始，还是看着solution理解出来的
+
+- 这条题目需要分析一个优化结构： ans[x]-ans[y] =#(Y)-#(X)
+- 我们用ans表示答案，ans[x] 表示节点x距离树中其他节点距离之和
+- 分析，我们设两个节点*x*,*y*，他们在树中，由一条边相连，如果删除这条边，我们会得到一个以x为root的子数X，以及以y为root的子数
+- 所以ans[x]的值有三个部分组成，第一部分是子树X中所有节点到root (x)的距离,记为x@X
+- 第二部分就是子树Y中的所有节点到y了， y@Y
+- 第三部分就是子树Y中所有节点从y到达x的总距离，它等于Y中的节点个数，记为#(Y),
+- 因此 ans[x] = x@X+y@Y+#(Y)
+- 同理我们可以得到 ans[y] =y@Y + x@X +#(X)
+
+## 算法分析
+
+- 我们指定0号为树的根节点，对于每个节点*node*,设S(node)是以node为root的子树， 我们用count[node]表示S(node)中的节点个数，并用stsum[node]表示S(node)中所有节点到node的总距离
+- 1 dfs算出所有的count，和stsum，对于每个节点node.
+- 因此，count[node] = sum(count[child])+1
+- 因此，stsum[node] = sum(stsum[child]+count[child])
+- 当获得所有节点后对于根节点，它的答案ans[root]就是stsum[root]
+- 根据递推公式，对于节点parent， 我们有ans[child]=ans[parent]-count[child]+(N-count[child])
+- O(n)
+```
+def sumofDistance(N,edges):
+    graph = collections.defaultdict(set)
+    for u,v in edges:
+        graph[u].add(v)
+        graph[v].add(u)
+
+    count =[1]*N
+    ans = [0]*N
+
+    def dfs(node,parent):
+        for child in graph[node]:
+            if child!=parent:
+                dfs(child,node)
+                count[node]+=count[child]
+                ans[node] += ans[child]+count[child]
+    def dfs2(node,parent):
+        for child in graph[node]:
+            if child!=parent:
+                ans[child]=ans[node]-count[child]+N-count[child]
+                dfs2(child,node)
+
+    dfs(0,None)
+    dfs2(0,None)
+
+    return ans
+
+```
