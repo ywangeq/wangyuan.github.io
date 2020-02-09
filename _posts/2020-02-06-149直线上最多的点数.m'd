@@ -49,6 +49,7 @@ def maxpoint(points):
             count,duo = check_line(i,j,count,duo)
         return count+duo
     for i in range(n-1):
+         
         max_count = max(max_p(i),max_count)
     return max_count
 ```
