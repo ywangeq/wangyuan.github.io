@@ -1,0 +1,112 @@
+---
+layout:     post
+title:      Leecode
+subtitle:   239  滑动窗口的最大值/最小值/取出最大值最小值后的最大均值
+date:       2020-02-10
+author:     WY
+header-img: img/post-bg-ios9-web.jpg
+catalog: true
+tags:
+    - python
+    - Leecode_hard
+    - BFS
+    - 单调队列
+    - 单调队列模板
+---
+
+给定一个数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。
+
+返回滑动窗口中的最大值。
+
+输入: nums = [1,3,-1,-3,5,3,6,7], 和 k = 3
+输出: [3,3,5,5,6,7] 
+解释: 
+
+  滑动窗口的位置                最大值
+---------------               -----
+[1  3  -1] -3  5  3  6  7       3
+ 1 [3  -1  -3] 5  3  6  7       3
+ 1  3 [-1  -3  5] 3  6  7       5
+ 1  3  -1 [-3  5  3] 6  7       5
+ 1  3  -1  -3 [5  3  6] 7       6
+ 1  3  -1  -3  5 [3  6  7]      7
+
+- 思路1 maxQUEUE T:O(N) S:O(N)
+### 单调队列模板
+```
+class MaxQueue:
+    def __init__(self):
+        self.q_ = collections.deque()
+
+    def push(self,e):
+        while self.q_ and e>self.q[-1]:
+            # 如果 改成小于 就是 minQueue()
+            self.q_.pop()
+    def pop(self):
+        self.q_.popleft()
+    def max(self):
+        return self.q_[0]
+class Solution:
+    def maxSliding(self,num,k):
+        q=MaxQueue()
+        ans =[]
+        for i in range(len(nums)):
+            q.push(nums[i])
+            if i >=k-1:
+                ans.append(q.max())
+                if nums[i-k+1]==q.max():
+                    q.pop()
+        return ans
+## 当然也可以不写 遵守这个规则就好
+
+    def maxSliding(self,num,k):
+        indices = []
+        ans = []
+        for i in range(len(nums)):
+            while indices and nums[i]>nums[indices[-1]]:
+                indices.pop()
+            indices.append(i)
+            if i>=k-1:
+                ans.append(nums[indices[0]])
+            if i-k+1 == indices[0]:#表示当前最大值而且马上不在框里了
+                indices.pop(0)
+        return ans
+```
+
+思路二 动态规划
+- 这是看题解才看明白的 很神奇 推荐去看
+https://leetcode-cn.com/problems/sliding-window-maximum/solution/hua-dong-chuang-kou-zui-da-zhi-by-leetcode-3/
+
+如果题目改成最小值
+很简单 用单调队列维护最小的就好
+
+```
+    def minSliding(self,num,k):
+        indices = []
+        ans = []
+        for i in range(len(nums)):
+            while indices and nums[i]<nums[indices[-1]]:
+                indices.pop()
+            indices.append(i)
+            if i>=k-1:
+                ans.append(nums[indices[0]])
+            if i-k+1 == indices[0]:#表示当前最大值而且马上不在框里了
+                indices.pop(0)
+        return ans
+```
+
+3 follow up 取出最大值最小值后的最大均值
+
+```
+def maxaverage(num,k):
+    min_k = minSliding(num,k)
+    max_k = maxSliding(num,k)
+    cur_sum = sum(num[:k])
+    res =[cur_sum]
+    for i in range(k,len(num)):
+        cur_sum+=num[i]-num[i-k]
+        res.append(cur_sum)
+    for i in range(len(num)):
+        # (sum-max-min)/(k-2)
+
+```
