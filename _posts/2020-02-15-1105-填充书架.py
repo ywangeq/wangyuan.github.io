@@ -1,0 +1,47 @@
+---
+layout:     post
+title:      Leecode
+subtitle:   1105 填充书架
+date:       2020-02-15
+author:     WY
+header-img: img/post-bg-ios9-web.jpg
+catalog: true
+tags:
+    - python_medium
+    - 动态规划
+---
+
+附近的家居城促销，你买回了一直心仪的可调节书架，打算把自己的书都整理到新的书架上。
+
+你把要摆放的书 books 都整理好，叠成一摞：从上往下，第 i 本书的厚度为 books[i][0]，高度为 books[i][1]。
+
+按顺序 将这些书摆放到总宽度为 shelf_width 的书架上。
+
+先选几本书放在书架上（它们的厚度之和小于等于书架的宽度 shelf_width），然后再建一层书架。重复这个过程，直到把所有的书都放在书架上。
+
+需要注意的是，在上述过程的每个步骤中，摆放书的顺序与你整理好的顺序相同。 例如，如果这里有 5 本书，那么可能的一种摆放情况是：第一和第二本书放在第一层书架上，第三本书放在第二层书架上，第四和第五本书放在最后一层书架上。
+
+每一层所摆放的书的最大高度就是这一层书架的层高，书架整体的高度为各层高之和。
+
+以这种方式布置书架，返回书架整体可能的最小高度。
+
+- dp[i] 表示i本书所需要的最小高度
+- 那么我们放好dp[i]后，看之前的数能否调整来减少高度
+- dp[i] = min(dp[i],dp[j-1]+h) j表示最后一层所能容下书的index，h表示最后一层的做大高度
+- T:O(n*n) S:O(n)
+
+```
+def minheight(books,shelf):
+    n = len(books)
+    dp = [(float('inf'))]*(n+1)
+    dp[0] = 0
+    for i in range(1,n+1):
+        w,h=0,0
+        for j in range(i,0,-1):
+            w +=books[j][0]
+            if w>shelf:
+                break
+            h = max(h,books[j][1])
+            dp[i] = min(dp[i],dp[j-1]+h)
+    return dp[-1]
+```
