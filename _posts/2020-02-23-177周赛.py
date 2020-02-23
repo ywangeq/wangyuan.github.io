@@ -1,0 +1,94 @@
+---
+layout:     post
+title:      Leecode 周赛
+subtitle:   
+date:       2020-02-21
+author:     WY
+header-img: img/post-bg-ios9-web.jpg
+catalog: true
+tags:
+    - 动态规划
+    - 因数
+    - 二叉树
+    - N的倍数(和)
+---
+
+
+#### 5170 
+
+二叉树上有 n 个节点，按从 0 到 n - 1 编号，其中节点 i 的两个子节点分别是 leftChild[i] 和 rightChild[i]。
+只有 所有 节点能够形成且 只 形成 一颗 有效的二叉树时，返回 true；否则返回 false。
+如果节点 i 没有左子节点，那么 leftChild[i] 就等于 -1。右子节点也符合该规则。
+
+输入：n = 4, leftChild = [1,-1,3,-1], rightChild = [2,-1,-1,-1]
+输出：true
+
+- 以图判树的一个变种，我们建图之后看是否有环，之后看彼此是否相连。
+
+```
+def validateBinaryTree(n,leftChild,rightChild):
+    grid =[[] for _ in range(n)]
+    for i in range(n):
+        if leftChild[i]!=-1:
+            grid[i].append(leftChild[i])
+        if rightChild[i]!=-1:
+            grid[i].append(rightChild[i])
+
+    visited =[0 for _ in range(n)]
+    def dfs(root):
+        for node in grid[root]:
+            if not visited[node]:
+                visited[node]=1
+            else:
+                visited[node]+=1
+    visited[0]=1
+    dfs(0)
+    return len(visited)==sum(visited)
+```
+
+#### 5175 最接近的因数
+给你一个整数 num，请你找出同时满足下面全部要求的两个整数：
+
+两数乘积等于  num + 1 或 num + 2
+以绝对差进行度量，两数大小最接近
+你可以按任意顺序返回这两个整数。
+- 直接搜两遍，通过因数快速分解
+
+```
+class Solution(object):
+    def closestDivisor(self,num):
+        def get_factor(n):
+            while n%i!=0:
+                i-=1
+            return i,n/i
+        a = get_factor(num+1)
+        b = get_factor(num+2)
+        if abs(a[0]-a[1])<abs(b[0]-b[1]):
+            return a 
+        else:
+            return b
+```
+
+#### 给你一个整数数组 digits，你可以通过按任意顺序连接其中某些数字来形成 3 的倍数，请你返回所能得到的最大的 3 的倍数。
+
+由于答案可能不在整数数据类型范围内，请以字符串形式返回答案。
+如果无法得到答案，请返回一个空字符串。
+
+输入：digits = [8,1,9]
+输出："981"
+- 和1262非常类似，我们维护一个dp来存余数为0，1，2的最大积
+
+
+```
+def largetsMultipleOfThree(digits):
+    dp =[0,-1,-1]
+    digits.sort(reverse=True)
+    for n in digits:
+        n = int(n)
+        dp = [max(dp[i],dp[(i+n)%3]*10+n for i in range(3))]
+    if sum(digits)==0:
+        return '0'
+    else:
+        return str(dp[0]) if dp[0]>0 else ''
+```
+ 
