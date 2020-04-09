@@ -32,11 +32,11 @@ tags:
 博主在做小目标检测的时候遇到这个,在了解tversky loss的时候可以看看tversky系数，这是Jaccard系数的一种广义系数。
 
 **1 公式**:  &ensp; 
- $T(A,B)$=$\frac{|A\bigcap B|}{|A\bigcup B| +\alpha|A=B| + \beta|B-A|}$
+ $T(A,B)$ = $\frac{|A\bigcap B|}{|A\bigcup B| +\alpha|A=B| + \beta|B-A|}$
 
 其中A为prediction，B为gt，如果了解过Dice loss不难发现，$\alpha=\beta=0.5$的时候，Tversky系数就是Dice系数，
 而当设置$\alpha=\beta=1$时，此时tversky系数就是jaccard系数。
 |A-B|意味着FP(假阳性)，而|B-A|意味着假阴性
 
-### 使用感想
-虽然这个loss是为了小目标，或者说对于整体来说很小的目标提出来的一个loss，但是在使用的过程中，一但目标和input超过了一个极限比例，loss很难是网络得到一个好的结果。一般我是先crossentroy 来train，等finetuning的时候再改变loss优化
+#### 使用感想
+    虽然这个loss是为了小目标，或者说对于整体来说很小的目标提出来的一个loss，但是在使用的过程中，一但目标和input超过了一个极限比例，loss很难是网络得到一个好的结果。一般我是先crossentroy 来train，等finetuning的时候再改变loss优化
