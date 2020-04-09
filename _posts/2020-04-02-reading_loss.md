@@ -31,7 +31,8 @@ tags:
 ### 1. Tversky loss
 博主在做小目标检测的时候遇到这个,在了解tversky loss的时候可以看看tversky系数，这是Jaccard系数的一种广义系数。
 
-**1 公式**:  &ensp;  $T(A,B)=\frac{|A \bigcap B|}{|A\bigcup B| +\alpha|A=B| + \beta|B-A|}$
+**1 公式**:  &ensp; 
+ $T(A,B)$=$\frac{|A\bigcap B|}{|A\bigcup B| +\alpha|A=B| + \beta|B-A|}$
 
 其中A为prediction，B为gt，如果了解过Dice loss不难发现，$\alpha=\beta=0.5$的时候，Tversky系数就是Dice系数，
 而当设置$\alpha=\beta=1$时，此时tversky系数就是jaccard系数。
