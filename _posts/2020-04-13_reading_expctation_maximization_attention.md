@@ -22,4 +22,4 @@ tags:
 
 简单的来说，作者使用EM算法来先找到一个更为紧密的数据基础集合，而不是将所有像素作为重建的数据基础集合，这样可以降低计算的复杂性。 深入的来说，作者将用于重建的数据基础作为需要在EM算法中学习的参数，将注意力map作为潜在变量。 在此模式上，EM算法的目标是找出(数据基础)的一个最大似然估计
 
-![]
+![baseline](https://raw.githubusercontent.com/ywangeq/ywangeq.github.io/master/img/EMA_baseline.png)
