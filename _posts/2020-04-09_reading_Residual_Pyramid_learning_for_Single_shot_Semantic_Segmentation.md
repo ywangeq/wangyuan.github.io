@@ -2,7 +2,7 @@
 layout:     post
 title:      Reading
 subtitle:   Residual Pyramid Learning for Single-Shot Semantic Segmentation
-date:       2020-04-02
+date:       2020-04-09
 author:     WY
 header-img: img/post-bg-debug.jpg
 catalog: true

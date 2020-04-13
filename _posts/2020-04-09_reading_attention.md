@@ -2,7 +2,7 @@
 layout:     post
 title:      Reading
 subtitle:   different attention in semantic segmentation
-date:       2020-04-02
+date:       2020-04-07
 author:     WY
 header-img: img/post-bg-debug.jpg
 catalog: true
