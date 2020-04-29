@@ -2,7 +2,7 @@
 layout:     post
 title:      Reading
 subtitle:   Long Tail Problem
-date:       2020-04-117
+date:       2020-04-27
 author:     WY
 header-img: img/post-bg-debug.jpg
 catalog: true
