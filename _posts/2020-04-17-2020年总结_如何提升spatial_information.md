@@ -2,7 +2,7 @@
 layout:     post
 title:      Reading
 subtitle:   个人总结_语义分割之spatial信息
-date:       2020-04-117
+date:       2020-04-17
 author:     WY
 header-img: img/post-bg-debug.jpg
 catalog: true
