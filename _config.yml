@@ -11,7 +11,7 @@ github_repo: "https://github.com/ywangeq/ywangeq.github.io.git" # you code repos
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "游戏人生"
+sidebar-about-description: "计算机视觉工程师"
 sidebar-avatar: /img/cat.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
