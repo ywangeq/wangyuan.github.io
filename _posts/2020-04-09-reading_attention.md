@@ -33,7 +33,7 @@ tags:
    - it proposed a Context-adaptvie Convolution Network to predict a spatially-varyin feature weighting vertor for each spatical location of the semantic feature maps(理解上是kernel可以同时generate the spatially varying feature weighting factors 在global和local contextual 信息上)
 3. Adaptive Pyramid Context Network for Semantic Segmentation
     - APCNet use global-guided local Affinity(GLA) to play a vital role in construction context features
-    - 
+    - 通过不同s的ACM module来提取Affinity Matrix 来更新feature map(通过 matrix product)
 ### CNN generation
 1. High Frequency Component Helps Explain the Generalization of Convolutional Neural Networks
    - 通过傅里叶变换分析发现，网络在学习的过程中会偏向于将高频成分当成语义成分，这样会导致其泛化特征的行为与人类的直觉相反
