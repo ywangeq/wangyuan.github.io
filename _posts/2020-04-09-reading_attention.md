@@ -37,3 +37,7 @@ tags:
 ### CNN generation
 1. High Frequency Component Helps Explain the Generalization of Convolutional Neural Networks
    - 通过傅里叶变换分析发现，网络在学习的过程中会偏向于将高频成分当成语义成分，这样会导致其泛化特征的行为与人类的直觉相反
+
+
+### relationship between different class
+1. Context Prior for Scene Segmentation
